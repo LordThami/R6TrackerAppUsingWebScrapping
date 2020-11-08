@@ -17,7 +17,15 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("R6 Tracker"),
+        title: Text(
+          "R6 Tracker",
+          style: GoogleFonts.ptSerif(
+            textStyle: TextStyle(
+              fontSize: 28.0,
+            ),
+          ),
+        ),
+        toolbarHeight: 100.0,
       ),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 40.0, horizontal: 40.0),
@@ -25,8 +33,13 @@ class _SearchScreenState extends State<SearchScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
+              style: TextStyle(
+                decoration: TextDecoration.none,
+              ),
               controller: usernameController,
               decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
@@ -35,6 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             SizedBox(height: 10.0),
             MaterialButton(
+              minWidth: 100.0,
+              height: 40.0,
               onPressed: () {
                 Navigator.push(
                   context,

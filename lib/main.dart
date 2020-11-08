@@ -1,3 +1,4 @@
+import 'package:R6Tracker/screens/home_screen.dart';
 import 'package:R6Tracker/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'R6 Tracker',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primarySwatch: Colors.red,
+        primaryColor: Colors.black,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchScreen(),
+      home: HomeScreen(),
     );
   }
 }
