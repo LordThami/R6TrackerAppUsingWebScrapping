@@ -25,13 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _getData();
+    _getData(widget.gamerName);
   }
 
-  _getData() async {
+  _getData(String name) async {
     String baseUrl = 'https://r6.tracker.network/profile/pc/';
     // String username = widget.gamerName;
-    String username = 'AB____';
+    String username = name;
 
     String url = baseUrl + username;
     var response = await http.get(url);
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       proPicImgUrl = proPicClass.attributes['src'].toString();
       proName = proNameClass.text.toString();
-      proView = proViewClass.text.toString();
+      proView = proViewClass.text.toString().substring(0, 2);
       userLevel = userLevelClass.text.toString();
       // userRank = userRankClass.text.toString().trim();
       // userWins = userWinsClass.text.toString().trim();
@@ -81,227 +81,195 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "R6 Tracker",
-          style: GoogleFonts.ptSerif(
-            textStyle: TextStyle(
-              fontSize: 28.0,
-            ),
-          ),
-        ),
-        toolbarHeight: 100.0,
-      ),
       body: proPicImgUrl == '' && proName == '' && proView == ''
           ? Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                children: [
-                  SizedBox(height: 10.0),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                    height: 120.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xfff9f9f9),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(2, 9),
-                          blurRadius: 20.0,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(proPicImgUrl),
-                          maxRadius: 50.0,
-                          minRadius: 10.0,
-                        ),
-                        SizedBox(width: 30.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              proName,
-                              style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                  fontSize: 24.0,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 5.0),
-                            Text(
-                              proView,
-                              style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.grey.withOpacity(0.7),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+          : Stack(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+                Container(
+                  height: 300.0,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xff6472d7),
+                          Color(0xffac8dcd),
+                        ]),
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 20.0,
+                        child: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  child: Container(
+                    height: 390,
+                    width: 420,
+                    color: Colors.white,
+                    child: Center(
+                      child: Text('bottom'),
                     ),
                   ),
-                  SizedBox(height: 20.0),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                ),
+                Positioned(
+                  top: 210.0,
+                  left: 30.0,
+                  child: Container(
                     height: 150.0,
-                    width: double.infinity,
+                    width: 350.0,
                     decoration: BoxDecoration(
-                      color: Color(0xfff9f9f9),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(2, 9),
-                          blurRadius: 20.0,
-                        ),
-                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "OVERVIEW",
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w600,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Top operators',
+                            style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 30.0),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
+                          SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image(
+                                image: NetworkImage(topOpsList[0]),
+                                width: 80,
+                                height: 80,
+                              ),
+                              SizedBox(height: 5.0),
+                              Image(
+                                image: NetworkImage(topOpsList[1]),
+                                width: 80,
+                                height: 80,
+                              ),
+                              SizedBox(height: 5.0),
+                              Image(
+                                image: NetworkImage(topOpsList[2]),
+                                width: 80,
+                                height: 80,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 50.0,
+                  left: 55.0,
+                  child: Container(
+                    height: 100.0,
+                    width: 300.0,
+                    child: Center(
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(proPicImgUrl),
+                            maxRadius: 50.0,
+                            minRadius: 10.0,
+                          ),
+                          SizedBox(width: 20.0),
+                          Container(
+                            width: 150.0,
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'LEVEL',
+                                  proName,
                                   style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey,
+                                      fontSize: 24.0,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 5.0),
-                                Text(
-                                  userLevel.trim(),
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: 40.0),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'RANK',
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 5.0),
-                                Text(
-                                  userRank.trim(),
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: 40.0),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'TOP OPERATORS',
-                                  style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 5.0),
+                                SizedBox(height: 20.0),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Image(
-                                      image: NetworkImage(topOpsList[0]),
-                                      width: 50,
-                                      height: 50,
+                                    Column(
+                                      children: [
+                                        Text(
+                                          userLevel.trim(),
+                                          style: GoogleFonts.montserrat(
+                                            textStyle: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          "LEVEL",
+                                          style: GoogleFonts.montserrat(
+                                            textStyle: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 5.0),
-                                    Image(
-                                      image: NetworkImage(topOpsList[1]),
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    SizedBox(height: 5.0),
-                                    Image(
-                                      image: NetworkImage(topOpsList[2]),
-                                      width: 50,
-                                      height: 50,
+                                    Column(
+                                      children: [
+                                        Text(
+                                          proView,
+                                          style: GoogleFonts.montserrat(
+                                            textStyle: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          "VIEWS",
+                                          style: GoogleFonts.montserrat(
+                                            textStyle: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
     );
   }
 }
-
-// Container(
-//         child: Center(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               proPicImgUrl == '' && proName == '' && proView == ''
-//                   ? CircularProgressIndicator()
-//                   : Image(
-//                       image: NetworkImage(proPicImgUrl),
-//                     ),
-//               SizedBox(height: 10.0),
-//               Text(proName),
-//               SizedBox(height: 10.0),
-//               Text(proView),
-//               SizedBox(height: 10.0),
-//               Text(userLevel),
-//               // SizedBox(height: 10.0),
-//               // Text("Rank: " + userRank),
-//             ],
-//           ),
-//         ),
-//       ),

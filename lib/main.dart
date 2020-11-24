@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'R6 Tracker',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.black,
+        primaryColor: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: SearchScreen(),
     );
   }
 }

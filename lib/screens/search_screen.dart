@@ -19,13 +19,10 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         title: Text(
           "R6 Tracker",
-          style: GoogleFonts.ptSerif(
-            textStyle: TextStyle(
-              fontSize: 28.0,
-            ),
+          style: GoogleFonts.montserrat(
+            textStyle: TextStyle(),
           ),
         ),
-        toolbarHeight: 100.0,
       ),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 40.0, horizontal: 40.0),
@@ -39,9 +36,14 @@ class _SearchScreenState extends State<SearchScreen> {
               controller: usernameController,
               decoration: InputDecoration(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
                 ),
                 labelText: 'Gamer Name',
               ),
